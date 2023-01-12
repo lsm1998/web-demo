@@ -22,12 +22,21 @@
   </div>
 
   <div>
-    dayjs : {{dayjs('2023-01-12T16:23:00+08:00').format('YYYY-MM-DD HH:mm:ss')}}
+    dayjs : {{ dayjs('2023-01-12T16:23:00+08:00').format('YYYY-MM-DD HH:mm:ss') }}
+  </div>
+
+  <div>
+    <nut-tabbar v-model:visible="tabIndex" :bottom="true" @tab-switch="tabSwitch" unactive-color="#7d7e80"
+                active-color="#1989fa">
+      <nut-tabbar-item tab-title="首页" icon="home"></nut-tabbar-item>
+      <nut-tabbar-item tab-title="搜索" icon="find"></nut-tabbar-item>
+      <nut-tabbar-item tab-title="购物车" icon="cart"></nut-tabbar-item>
+      <nut-tabbar-item tab-title="个人" icon="my"></nut-tabbar-item>
+    </nut-tabbar>
   </div>
 </template>
 
 <script setup lang="ts">
-
 import {useUserStore} from "./store/user"
 import {ref} from "vue";
 import {PickerOption} from "@nutui/nutui/dist/types/__VUE/picker/types";
@@ -39,6 +48,8 @@ const useStore = useUserStore()
 const add = () => {
   useStore.age++;
 }
+
+const tabIndex = ref(0);
 
 const changeName = () => {
   useStore.setName('new name')
@@ -56,6 +67,12 @@ const confirm = ({selectedValue, selectedOptions}: {
   selectedOptions: PickerOption[];
 }) => {
   desc.value = selectedOptions.map((option: PickerOption) => option.text).join('');
+}
+
+const tabSwitch = (data: any, index: number) => {
+  console.log(data.tabTitle)
+  console.log(index)
+  console.log(tabIndex.value)
 }
 </script>
 

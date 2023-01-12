@@ -10,8 +10,8 @@ export const useUserStore = defineStore('user', {
     },
     // 相当于计算属性
     getters: {
-        doubleAge(state) {
-            return state.age * 2;
+        doubleAge() :number {
+            return this.age * 2;
         },
         getNameAndAge(): string {
             return this.name + this.age

@@ -20,6 +20,10 @@
         @confirm="confirm"
     ></nut-datepicker>
   </div>
+
+  <div>
+    dayjs : {{dayjs('2023-01-12T16:23:00+08:00').format('YYYY-MM-DD HH:mm:ss')}}
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -27,6 +31,8 @@
 import {useUserStore} from "./store/user"
 import {ref} from "vue";
 import {PickerOption} from "@nutui/nutui/dist/types/__VUE/picker/types";
+
+import dayjs from "dayjs";
 
 const useStore = useUserStore()
 

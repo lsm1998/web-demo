@@ -10,6 +10,7 @@
 
   <div>
     <nut-cell title="显示中文" :desc="desc" @click="show = true"></nut-cell>
+    {{ currentDate }}
     <nut-datepicker
         v-model="currentDate"
         v-model:visible="show"
@@ -38,7 +39,7 @@
 
 <script setup lang="ts">
 import {useUserStore} from "./store/user"
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {PickerOption} from "@nutui/nutui/dist/types/__VUE/picker/types";
 
 import dayjs from "dayjs";
@@ -60,7 +61,7 @@ const desc = ref('2022年05月10日');
 
 const minDate = new Date(2020, 0, 1);
 const maxDate = new Date(2025, 10, 1);
-const currentDate = new Date(2022, 4, 10, 10, 10);
+const currentDate = ref(new Date(2022, 4, 10, 10, 10));
 
 const confirm = ({selectedValue, selectedOptions}: {
   selectedValue: (string | number)[];
@@ -74,6 +75,11 @@ const tabSwitch = (data: any, index: number) => {
   console.log(index)
   console.log(tabIndex.value)
 }
+
+watch(currentDate, (newVal: Date, oldVal: Date) => {
+  console.log("newVal=", newVal)
+  console.log("oldVal=", oldVal)
+})
 </script>
 
 <style scoped>

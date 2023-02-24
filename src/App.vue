@@ -13,6 +13,17 @@ import {onMounted} from "vue";
 
 const setup = () => {
   console.log('app setup');
+
+  try {
+    // const bfWorker = new Worker(window.URL.createObjectURL(new Blob(['1'])));
+    window.addEventListener('pageshow', event => {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    })
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 onMounted(() => {

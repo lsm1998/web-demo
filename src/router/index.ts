@@ -12,15 +12,25 @@ const router = createRouter({
             path: '/index',
             name: 'index',
             meta: {
-                keepAlive: true
+                usePathKey: "index",
+                keepAlive: false
             },
             component: () => import('../views/Index.vue')
+        },
+        {
+            path: '/user',
+            name: 'user',
+            meta: {
+                usePathKey: "user",
+                keepAlive: true
+            },
+            component: () => import('../views/User.vue')
         },
         {
             path: '/tab',
             name: 'tab',
             meta: {
-                keepAlive: true
+               //  keepAlive: true
             },
             component: () => import('../views/Tab.vue')
         }

@@ -9,7 +9,7 @@
 import router from "@/router";
 
 const back = () => {
-  router.push({path: '/index'});
+  router.back();
 }
 </script>
 

@@ -1,50 +1,30 @@
 <template>
-  <nut-tabs v-model="tabsValue" animatedTime="0">
-    <nut-tab-pane title="自定义加载文案">
-      {{scrollTop}}
-      <ul class="infiniteUl" ref="listScroll" @scroll="scrollFun($event)">
-        <nut-infinite-loading
-            v-model="infinityValue"
-            load-txt="Loading..."
-            load-more-txt="没有啦~"
-            :has-more="hasMore"
-            @load-more="loadMore"
-        >
-          <li class="infiniteLi" @click="openTab" v-for="(item, index) in defultList" :key="index">{{ item }}</li>
-        </nut-infinite-loading>
-      </ul>
-    </nut-tab-pane>
-  </nut-tabs>
+  <tabbar></tabbar>
+  <h2>首页</h2>
 </template>
 
-<script setup>
-import {ref} from 'vue';
-import router from "@/router";
+<script setup lang="ts">
+import Tabbar from "@/components/Tabbar1.vue";
 
-let cycle = 0;
-const tabsValue = ref(0)
-const infinityValue = ref(false)
-const hasMore = ref(true);
-const letter = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'IJ', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-const defultList = ref(letter);
-const loadMore = () => {
-  setTimeout(() => {
-    defultList.value = defultList.value.concat(letter);
-    cycle++;
-    if (cycle > 2) hasMore.value = false;
-    infinityValue.value = false;
-  }, 1000);
-};
+import {onMounted} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
-const openTab = () => {
-  router.push({path: '/tab'});
-};
+const route = useRoute();
+const router = useRouter();
 
-const scrollTop = ref(0);
-
-const scrollFun = (data) => {
-  scrollTop.value = data.currentTarget.scrollTop;
-}
+onMounted(() => {
+  console.log('app mounted');
+  if (route.query.redirect) {
+    const redirect = route.query.redirect as string;
+    delete route.query.redirect;
+    router.push({
+      path: redirect,
+      query: {
+        ...route.query
+      }
+    })
+  }
+});
 </script>
 
 <style lang="scss">

@@ -1,23 +1,16 @@
 <template>
-  <div id="app">
-    <keep-alive v-if="this.$route.meta.keepAlive">
-      <router-view></router-view>
-    </keep-alive>
-    <router-view v-else></router-view>
-  </div>
+  <router-view v-slot="{ Component }">
+    <KeepAlive>
+      <component :is="Component" :key="$route.name" v-if="this.$route.meta.keepAlive"></component>
+    </KeepAlive>
+    <component :is="Component" :key="$route.name" v-if="!this.$route.meta.keepAlive"></component>
+  </router-view>
 </template>
 
 <script setup lang="ts">
-
-import {onMounted} from "vue";
-
 const setup = () => {
   console.log('app setup');
 };
-
-onMounted(() => {
-  console.log('app mounted');
-});
 
 setup();
 </script>

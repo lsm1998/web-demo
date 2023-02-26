@@ -18,7 +18,7 @@
   </nut-tabs>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {onActivated, onMounted, ref} from 'vue';
 import router from "@/router";
 import Tabbar from "@/components/Tabbar2.vue";
@@ -44,7 +44,7 @@ const openTab = () => {
 
 const scrollTop = ref(0);
 
-const scrollFun = (data) => {
+const scrollFun = (data :any) => {
   scrollTop.value = data.currentTarget.scrollTop;
 }
 

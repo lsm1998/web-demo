@@ -5,12 +5,12 @@
   <nut-button type="success" @click="back">返回</nut-button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import router from "@/router";
 
 const back = () => {
   router.back();
-}
+};
 </script>
 
 <style scoped>

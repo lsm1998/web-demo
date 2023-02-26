@@ -1,13 +1,17 @@
 <template>
   <router-view v-slot="{ Component }">
     <KeepAlive>
-      <component :is="Component" :key="$route.name" v-if="this.$route.meta.keepAlive"></component>
+      <component :is="Component" :key="$route.name" v-if="route.meta?.keepAlive"></component>
     </KeepAlive>
-    <component :is="Component" :key="$route.name" v-if="!this.$route.meta.keepAlive"></component>
+    <component :is="Component" :key="$route.name" v-if="!route.meta?.keepAlive"></component>
   </router-view>
 </template>
 
 <script setup lang="ts">
+import {useRoute} from "vue-router";
+
+const route = useRoute();
+
 const setup = () => {
   console.log('app setup');
 

@@ -13,7 +13,7 @@ const router = createRouter({
             name: 'index',
             meta: {
                 usePathKey: "index",
-                keepAlive: false
+                keepAlive: true
             },
             component: () => import('../views/Index.vue')
         },
